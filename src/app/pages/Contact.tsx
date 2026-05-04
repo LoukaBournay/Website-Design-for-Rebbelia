@@ -11,14 +11,39 @@ export function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("https://formspree.io/f/xgodazvg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      setSubmitted(true);
       setFormData({ name: "", email: "", company: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
+    } catch {
+      setSubmitError("Une erreur est survenue. Merci de reessayer ou de nous ecrire par email.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -76,7 +101,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Email</h3>
-                    <p className="text-[#8ea3c5]">contact@rebbelia.com</p>
+                    <p className="text-[#8ea3c5]">rebbelia@rebbelia.com</p>
                   </div>
                 </div>
 
@@ -86,7 +111,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Téléphone</h3>
-                    <p className="text-[#8ea3c5]">+33 1 23 45 67 89</p>
+                    <p className="text-[#8ea3c5]">+33 7 82 39 43 68</p>
                   </div>
                 </div>
 
@@ -96,7 +121,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Adresse</h3>
-                    <p className="text-[#8ea3c5]">75001 Paris, France</p>
+                    <p className="text-[#8ea3c5]">11 rue du docteur Robert 38230 pont de cheruy — France</p>
                   </div>
                 </div>
               </div>
@@ -182,11 +207,18 @@ export function Contact() {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full bg-[#2563EB] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1d4ed8] transition-colors flex items-center justify-center gap-2"
                   >
-                    Envoyer le message
+                    {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
                     <ArrowRight className="w-5 h-5" />
                   </button>
+
+                  {submitError ? (
+                    <p className="text-center text-sm text-red-300">
+                      {submitError}
+                    </p>
+                  ) : null}
 
                   <p className="text-center text-xs text-[#94a3b8]">
                     Devis gratuit · Réponse sous 24h · Sans engagement

@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <div className="text-2xl font-bold text-white mb-4">Rebbelia</div>
             <p className="text-white/45">
-              Tout client mérite une réponse
+              Automatiser, Respirer.
             </p>
           </div>
 
@@ -28,18 +28,21 @@ export function Footer() {
               <Link to="/faq" className="block text-white/45 hover:text-white transition-colors">
                 FAQ
               </Link>
+              <Link to="/legal" className="block text-white/45 hover:text-white transition-colors">
+                Legal
+              </Link>
             </div>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <div className="space-y-2 text-white/45">
-              <p>contact@rebbelia.com</p>
-              <p>+33 1 23 45 67 89</p>
+              <p>rebbelia@rebbelia.com</p>
+              <p>+33 7 82 39 43 68</p>
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="font-semibold mb-4">Suivez-nous</h3>
             <div className="flex space-x-4">
               <a href="#" className="text-white/45 hover:text-white transition-colors">
@@ -52,7 +55,7 @@ export function Footer() {
                 <Mail size={20} />
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/45">

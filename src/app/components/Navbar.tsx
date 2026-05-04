@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "./Button";
+import RebbeliaLogo from "../../app/assets/logo.png";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,7 +36,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-white">Rebbelia</div>
+            <div className="text-2xl font-bold text-white"><img src={ RebbeliaLogo } alt="Rebbelia Logo" /></div>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">

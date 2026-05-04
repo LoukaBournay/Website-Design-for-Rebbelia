@@ -4,7 +4,7 @@ import { ButtonPrimary } from "../components/ButtonPrimary";
 import { GlassCard } from "../components/GlassCard";
 import { Bot, Zap, Workflow, Mail, ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
-import workflowImage from "../assets/workflow.png";
+import WorkflowDiagram from "../components/WorkflowDiagram";
 
 export function HomeNew() {
   const integrations = ["Salesforce", "HubSpot", "Slack", "Gmail", "Zapier", "Teams"];
@@ -51,7 +51,6 @@ export function HomeNew() {
     <div className="overflow-hidden bg-[#050d1f] text-white">
       {/* HERO SECTION */}
       <section className="relative bg-[#050d1f] min-h-screen flex items-center overflow-hidden">
-        {/* Grid Background */}
         <div className="absolute inset-0 opacity-[0.03]">
           <div
             className="absolute inset-0"
@@ -62,7 +61,6 @@ export function HomeNew() {
           />
         </div>
 
-        {/* Orbes lumineux */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20 animate-float" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#60a5fa] rounded-full blur-[150px] opacity-15 animate-float" style={{ animationDelay: "3s" }} />
 
@@ -72,9 +70,9 @@ export function HomeNew() {
               <Badge variant="light">Automatisation IA pour PME</Badge>
 
               <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.05] animate-fade-in-up">
-                Tout client mérite{" "}
+                Rebbelia{" "}
                 <span className="bg-gradient-to-r from-[#2563EB] to-[#60a5fa] bg-clip-text text-transparent">
-                  une réponse
+                  Automatiser, Respirer.
                 </span>
               </h1>
 
@@ -144,11 +142,13 @@ export function HomeNew() {
               Exemple d'automatisation email
             </h2>
             <p className="mt-4 max-w-3xl mx-auto text-lg text-[#8ea3c5] leading-relaxed">
-              Une carte statique pour montrer comment une automatisation peut lire un email, analyser le contexte et envoyer la bonne reponse sans intervention manuelle.
+              Une carte statique pour montrer comment une automatisation peut lire un email, analyser
+              le contexte et envoyer la bonne réponse sans intervention manuelle.
             </p>
           </div>
 
           <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0b1730] p-6 lg:p-10 shadow-[0_30px_80px_rgba(2,8,23,0.45)]">
+            {/* Grid background */}
             <div
               className="absolute inset-0 opacity-40"
               style={{
@@ -157,15 +157,13 @@ export function HomeNew() {
                 backgroundSize: "28px 28px",
               }}
             />
+            {/* Glow orbs */}
             <div className="absolute -top-16 right-16 h-40 w-40 rounded-full bg-[#2563EB]/10 blur-3xl" />
             <div className="absolute -bottom-10 left-14 h-32 w-32 rounded-full bg-[#14b889]/10 blur-3xl" />
 
-            <div className="relative z-10">
-              <img
-                src={workflowImage}
-                alt="Aperçu complet d'un workflow d'automatisation email"
-                className="mx-auto h-auto w-full max-w-[1120px] object-contain"
-              />
+            {/* ✅ WorkflowDiagram remplace l'image */}
+            <div className="relative z-10 max-w-[1120px] mx-auto py-6">
+              <WorkflowDiagram />
             </div>
           </div>
         </div>
@@ -184,7 +182,6 @@ export function HomeNew() {
           </div>
 
           <div className="grid lg:grid-cols-5 gap-6">
-            {/* Grande card gauche */}
             <div className="lg:col-span-3 bg-[#0b1730] rounded-2xl p-8 lg:p-10 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all group">
               <div className="w-16 h-16 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#2563EB] transition-all">
                 <Bot className="w-8 h-8 text-[#2563EB] group-hover:text-white transition-colors" />
@@ -199,7 +196,6 @@ export function HomeNew() {
               </Link>
             </div>
 
-            {/* Petites cards droite */}
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-[#0b1730] rounded-2xl p-6 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all group">
                 <div className="w-12 h-12 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#2563EB] transition-all">
