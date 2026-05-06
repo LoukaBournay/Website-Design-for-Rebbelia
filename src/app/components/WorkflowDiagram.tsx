@@ -77,43 +77,43 @@ const IconSlack = () => (
 const NODES: NodeData[] = [
   {
     id: 'webhook', cx: 72, cy: 160,
-    color: '#ef4444',
+    color: '#1E4E8C',
     label: 'Webhooks', sub: 'Customer Mailbox',
     icon: <IconWebhook />,
   },
   {
     id: 'json', cx: 215, cy: 160,
-    color: '#8b5cf6',
+    color: '#D4A64A',
     label: 'JSON', sub: 'Parse data',
     icon: <IconJson />,
   },
   {
     id: 'router', cx: 358, cy: 160,
-    color: '#22c55e',
+    color: '#2F7A5F',
     label: 'Router', sub: 'Branching logic',
     icon: <IconRouter />,
   },
   {
     id: 'ai', cx: 498, cy: 78,
-    color: '#f59e0b',
+    color: '#1E4E8C',
     label: 'AI Prompt', sub: 'Analyse context',
     icon: <IconAI />,
   },
   {
     id: 'email', cx: 630, cy: 78,
-    color: '#ef4444',
+    color: '#D4A64A',
     label: 'Send Email', sub: 'Auto response',
     icon: <IconEmail />,
   },
   {
     id: 'http', cx: 498, cy: 242,
-    color: '#06b6d4',
+    color: '#2F7A5F',
     label: 'HTTPS', sub: 'External request',
     icon: <IconHttp />,
   },
   {
     id: 'slack', cx: 630, cy: 242,
-    color: '#3b82f6',
+    color: '#1E4E8C',
     label: 'Slack', sub: 'Notification',
     icon: <IconSlack />,
   },
@@ -158,7 +158,7 @@ export default function WorkflowDiagram() {
             <g key={i}>
               <line
                 x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2}
-                stroke="rgba(255,255,255,0.18)"
+                stroke="rgba(30,78,140,0.24)"
                 strokeWidth="1.5"
                 strokeDasharray="6 4"
                 className="wf-edge"
@@ -166,8 +166,8 @@ export default function WorkflowDiagram() {
               />
               {/* midpoint dot */}
               <circle cx={mx} cy={my} r={3.5}
-                fill="rgba(255,255,255,0.08)"
-                stroke="rgba(255,255,255,0.22)"
+                fill="rgba(30,78,140,0.08)"
+                stroke="rgba(30,78,140,0.24)"
                 strokeWidth="1"
               />
             </g>
@@ -201,7 +201,7 @@ export default function WorkflowDiagram() {
             <text
               x={n.cx} y={n.cy + R + 18}
               textAnchor="middle"
-              fill="white"
+              fill="#172033"
               fontSize={11}
               fontWeight={600}
               fontFamily="sans-serif"
@@ -213,7 +213,7 @@ export default function WorkflowDiagram() {
               <text
                 x={n.cx} y={n.cy + R + 30}
                 textAnchor="middle"
-                fill="rgba(255,255,255,0.4)"
+                fill="#5E6B82"
                 fontSize={9}
                 fontFamily="sans-serif"
               >

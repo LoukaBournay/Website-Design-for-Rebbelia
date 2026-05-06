@@ -9,8 +9,8 @@ export function ButtonPrimary({ variant = "solid", children, className = "", ...
   const baseStyles = "px-8 py-3.5 rounded-full font-medium transition-all hover:scale-105 active:scale-95";
 
   const variantStyles = {
-    solid: "bg-[#2563EB] text-white hover:bg-[#1d4ed8] shadow-lg shadow-[#2563EB]/20",
-    outline: "border-2 border-white text-white hover:bg-white/10",
+    solid: "bg-[#1E4E8C] text-white hover:bg-[#2F7A5F] shadow-lg shadow-[#1E4E8C]/20",
+    outline: "border-2 border-[#1E4E8C]/20 bg-white text-[#1E4E8C] hover:border-[#D4A64A] hover:bg-[#D4A64A]/10",
   };
 
   return (
@@ -22,3 +22,4 @@ export function ButtonPrimary({ variant = "solid", children, className = "", ...
     </button>
   );
 }
+

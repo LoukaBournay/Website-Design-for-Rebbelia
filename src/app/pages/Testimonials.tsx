@@ -33,67 +33,67 @@ export function Testimonials() {
   ];
 
   return (
-    <div className="overflow-hidden bg-[#050d1f] text-white">
-      {/* HERO */}
-      <section className="relative bg-[#050d1f] py-32 overflow-hidden">
+    <div className="overflow-hidden bg-[#F7F9FC] text-[#172033]">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)] py-32">
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-60"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)",
             backgroundSize: "50px 50px",
           }}
         />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20 animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-[#60a5fa] rounded-full blur-[150px] opacity-15 animate-float" style={{ animationDelay: "3s" }} />
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-12 blur-[150px] animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-[#D4A64A] opacity-10 blur-[150px] animate-float" style={{ animationDelay: "3s" }} />
 
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#2563EB]/30 bg-[#2563EB]/10 text-[#60a5fa] text-sm font-medium mb-8">
+        <div className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10">
+          <div className="mb-8 inline-flex items-center rounded-full border border-[#1E4E8C]/20 bg-white/80 px-4 py-2 text-sm font-medium text-[#1E4E8C] shadow-sm shadow-[#1E4E8C]/5">
             Ils nous font confiance
           </div>
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-6">
+          <h1 className="mb-6 text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
             Ce que disent{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#60a5fa] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">
               nos clients
             </span>
           </h1>
-          <p className="text-lg text-white/65 max-w-3xl mx-auto leading-relaxed">
-            Découvrez comment nos clients ont transformé leur entreprise grâce à l'automatisation IA
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[#5E6B82]">
+            Découvrez comment nos clients ont transformé leur entreprise grâce à l'automatisation IA.
           </p>
         </div>
       </section>
 
-      {/* CHIFFRES */}
-      <section className="bg-[#091427] py-20">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="grid md:grid-cols-3 gap-12 text-center">
+      {/* Stats Section */}
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="grid gap-12 text-center md:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <div className="text-5xl lg:text-6xl font-extrabold text-white mb-3">{stat.value}</div>
-                <div className="text-white/60 text-lg">{stat.label}</div>
+                <div className="mb-3 text-5xl font-extrabold text-[#172033] lg:text-6xl">{stat.value}</div>
+                <div className="text-lg text-[#5E6B82]">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TÉMOIGNAGES */}
-      <section className="bg-gradient-to-b from-[#091427] to-[#081226] py-24 lg:py-32">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Testimonials Grid */}
+      <section className="bg-[#EEF3F8] py-24 lg:py-32">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-[#0b1730] rounded-2xl p-8 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all"
+                className="rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]"
               >
-                <div className="text-[#2563EB] text-6xl leading-none mb-4 font-serif">"</div>
-                <p className="text-white text-lg italic mb-6 leading-relaxed">{testimonial.quote}</p>
+                <div className="mb-4 font-serif text-6xl leading-none text-[#1E4E8C]">"</div>
+                <p className="mb-6 text-lg italic leading-relaxed text-[#172033]">{testimonial.quote}</p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB] to-[#60a5fa] rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1E4E8C] to-[#D4A64A] font-semibold text-white">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-[#8ea3c5]">{testimonial.role} · {testimonial.company}</div>
+                    <div className="font-semibold text-[#172033]">{testimonial.name}</div>
+                    <div className="text-sm text-[#5E6B82]">{testimonial.role} · {testimonial.company}</div>
                   </div>
                 </div>
               </div>
@@ -102,22 +102,22 @@ export function Testimonials() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="bg-[#050d1f] py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20" />
-        <div className="relative max-w-4xl mx-auto px-6 lg:px-10 text-center">
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6">
+      {/* CTA Section */}
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,_#EEF3F8_0%,_#F7F9FC_100%)] py-24">
+        <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1E4E8C] opacity-10 blur-[150px]" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
+          <h2 className="mb-6 text-4xl font-extrabold text-[#172033] lg:text-5xl">
             Rejoignez nos clients satisfaits
           </h2>
-          <p className="text-xl text-white/65 mb-8">
-            Découvrez comment l'automatisation IA peut transformer votre entreprise
+          <p className="mb-8 text-xl text-[#5E6B82]">
+            Découvrez comment l'automatisation IA peut transformer votre entreprise.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1d4ed8] transition-colors"
+            className="inline-flex items-center gap-2 rounded-full bg-[#1E4E8C] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#2F7A5F]"
           >
             Demander une démo
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>

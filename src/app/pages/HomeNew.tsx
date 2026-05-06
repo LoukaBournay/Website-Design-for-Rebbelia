@@ -7,7 +7,8 @@ import { useState } from "react";
 import WorkflowDiagram from "../components/WorkflowDiagram";
 
 export function HomeNew() {
-  const integrations = ["Salesforce", "HubSpot", "Slack", "Gmail", "Zapier", "Teams"];
+  // Remplacement de la ligne existante par celle-ci :
+  const integrations = ["Make", "OpenAI", "Notion", "WhatsApp", "Stripe", "Outlook"];
 
   const stats = [
     { value: "3x plus vite", label: "Temps de réponse moyen" },
@@ -48,39 +49,41 @@ export function HomeNew() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="overflow-hidden bg-[#050d1f] text-white">
-      {/* HERO SECTION */}
-      <section className="relative bg-[#050d1f] min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]">
+    <div className="overflow-hidden bg-[#F7F9FC] text-[#172033]">
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)]">
+        <div className="absolute inset-0 opacity-60">
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+              backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)",
               backgroundSize: "50px 50px",
             }}
           />
         </div>
 
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20 animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#60a5fa] rounded-full blur-[150px] opacity-15 animate-float" style={{ animationDelay: "3s" }} />
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-12 blur-[150px] animate-float" />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[#D4A64A] opacity-10 blur-[150px] animate-float"
+          style={{ animationDelay: "3s" }}
+        />
 
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 py-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="relative mx-auto max-w-[1280px] px-6 py-32 lg:px-10">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
             <div className="space-y-8">
               <Badge variant="light">Automatisation IA pour PME</Badge>
 
-              <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.05] animate-fade-in-up">
+              <h1 className="animate-fade-in-up text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
                 Rebbelia{" "}
-                <span className="bg-gradient-to-r from-[#2563EB] to-[#60a5fa] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">
                   Automatiser, Respirer.
                 </span>
               </h1>
 
-              <p className="text-lg text-white/65 leading-relaxed animate-fade-in-up animate-delay-200">
+              <p className="animate-fade-in-up animate-delay-200 text-lg leading-relaxed text-[#5E6B82]">
                 On automatise vos réponses clients pour que vous n'en ratiez plus aucune. Gagnez du temps, améliorez la satisfaction et concentrez-vous sur l'essentiel.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animate-delay-400">
+              <div className="animate-fade-in-up animate-delay-400 flex flex-col gap-4 sm:flex-row">
                 <Link to="/contact">
                   <ButtonPrimary variant="solid">Démarrer maintenant</ButtonPrimary>
                 </Link>
@@ -93,21 +96,21 @@ export function HomeNew() {
             <div className="relative animate-fade-in-up animate-delay-400">
               <GlassCard className="p-8 lg:p-12">
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="bg-white/5 rounded-2xl p-6 flex flex-col items-center justify-center h-32 hover:bg-white/10 transition-all">
-                    <Bot className="w-12 h-12 text-[#60a5fa] mb-2" />
-                    <span className="text-white/70 text-sm">RPA</span>
+                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
+                    <Bot className="mb-2 h-12 w-12 text-[#D4A64A]" />
+                    <span className="text-sm text-[#5E6B82]">RPA</span>
                   </div>
-                  <div className="bg-white/5 rounded-2xl p-6 flex flex-col items-center justify-center h-32 hover:bg-white/10 transition-all">
-                    <Zap className="w-12 h-12 text-[#60a5fa] mb-2" />
-                    <span className="text-white/70 text-sm">IA Rapide</span>
+                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
+                    <Zap className="mb-2 h-12 w-12 text-[#D4A64A]" />
+                    <span className="text-sm text-[#5E6B82]">IA Rapide</span>
                   </div>
-                  <div className="bg-white/5 rounded-2xl p-6 flex flex-col items-center justify-center h-32 hover:bg-white/10 transition-all">
-                    <Workflow className="w-12 h-12 text-[#60a5fa] mb-2" />
-                    <span className="text-white/70 text-sm">Workflows</span>
+                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
+                    <Workflow className="mb-2 h-12 w-12 text-[#D4A64A]" />
+                    <span className="text-sm text-[#5E6B82]">Workflows</span>
                   </div>
-                  <div className="bg-white/5 rounded-2xl p-6 flex flex-col items-center justify-center h-32 hover:bg-white/10 transition-all">
-                    <Mail className="w-12 h-12 text-[#60a5fa] mb-2" />
-                    <span className="text-white/70 text-sm">CRM & Email</span>
+                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
+                    <Mail className="mb-2 h-12 w-12 text-[#D4A64A]" />
+                    <span className="text-sm text-[#5E6B82]">CRM & Email</span>
                   </div>
                 </div>
               </GlassCard>
@@ -116,15 +119,14 @@ export function HomeNew() {
         </div>
       </section>
 
-      {/* BANDE INTEGRATIONS */}
-      <section className="bg-gradient-to-b from-[#050d1f] to-[#081226] py-16">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <p className="text-center text-[#8ea3c5] mb-8 text-sm uppercase tracking-wider">Nos intégrations</p>
-          <div className="flex flex-wrap justify-center items-center gap-12">
+      <section className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF3F8] py-16">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <p className="mb-8 text-center text-sm uppercase tracking-wider text-[#5E6B82]">Nos intégrations</p>
+          <div className="flex flex-wrap items-center justify-center gap-12">
             {integrations.map((integration) => (
               <div
                 key={integration}
-                className="text-[#8ea3c5] font-semibold text-lg opacity-50 hover:opacity-80 transition-opacity"
+                className="text-lg font-semibold text-[#5E6B82] opacity-60 transition-opacity hover:opacity-100"
               >
                 {integration}
               </div>
@@ -133,86 +135,81 @@ export function HomeNew() {
         </div>
       </section>
 
-      {/* AUTOMATION PREVIEW */}
-      <section className="bg-[#081226] pb-24 lg:pb-28">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="text-center mb-12">
+      <section className="bg-[#F7F9FC] pb-24 lg:pb-28">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="mb-12 text-center">
             <Badge variant="blue">Maquette visuelle</Badge>
-            <h2 className="mt-5 text-4xl lg:text-5xl font-bold text-white">
+            <h2 className="mt-5 text-4xl font-bold text-[#172033] lg:text-5xl">
               Exemple d'automatisation email
             </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-[#8ea3c5] leading-relaxed">
+            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-[#5E6B82]">
               Une carte statique pour montrer comment une automatisation peut lire un email, analyser
               le contexte et envoyer la bonne réponse sans intervention manuelle.
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0b1730] p-6 lg:p-10 shadow-[0_30px_80px_rgba(2,8,23,0.45)]">
-            {/* Grid background */}
+          <div className="relative overflow-hidden rounded-[32px] border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_30px_80px_rgba(30,78,140,0.12)] lg:p-10">
             <div
               className="absolute inset-0 opacity-40"
               style={{
                 backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+                  "linear-gradient(rgba(30,78,140,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.05) 1px, transparent 1px)",
                 backgroundSize: "28px 28px",
               }}
             />
-            {/* Glow orbs */}
-            <div className="absolute -top-16 right-16 h-40 w-40 rounded-full bg-[#2563EB]/10 blur-3xl" />
-            <div className="absolute -bottom-10 left-14 h-32 w-32 rounded-full bg-[#14b889]/10 blur-3xl" />
+            <div className="absolute -top-16 right-16 h-40 w-40 rounded-full bg-[#1E4E8C]/10 blur-3xl" />
+            <div className="absolute -bottom-10 left-14 h-32 w-32 rounded-full bg-[#2F7A5F]/10 blur-3xl" />
 
-            {/* ✅ WorkflowDiagram remplace l'image */}
-            <div className="relative z-10 max-w-[1120px] mx-auto py-6">
+            <div className="relative z-10 mx-auto max-w-[1120px] py-6">
               <WorkflowDiagram />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES SECTION */}
-      <section className="bg-[#081226] py-24 lg:py-32">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+      <section className="bg-[#EEF3F8] py-24 lg:py-32">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
               Nos Services
             </h2>
-            <p className="text-lg text-[#8ea3c5] max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-lg text-[#5E6B82]">
               Des solutions d'automatisation IA sur mesure pour votre entreprise
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-6">
-            <div className="lg:col-span-3 bg-[#0b1730] rounded-2xl p-8 lg:p-10 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all group">
-              <div className="w-16 h-16 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#2563EB] transition-all">
-                <Bot className="w-8 h-8 text-[#2563EB] group-hover:text-white transition-colors" />
+          <div className="grid gap-6 lg:grid-cols-5">
+            <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)] lg:col-span-3 lg:p-10">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
+                <Bot className="h-8 w-8 text-[#1E4E8C] transition-colors group-hover:text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Automatisation RPA</h3>
-              <p className="text-[#8ea3c5] leading-relaxed mb-6">
+              <h3 className="mb-4 text-2xl font-bold text-[#172033]">Automatisation RPA</h3>
+              <p className="mb-6 leading-relaxed text-[#5E6B82]">
                 Automatisez vos tâches répétitives grâce à la Robotic Process Automation. Réduisez les erreurs humaines et libérez du temps pour vos équipes.
               </p>
-              <Link to="/services" className="inline-flex items-center text-[#2563EB] font-semibold hover:gap-3 gap-2 transition-all">
+              <Link to="/services" className="inline-flex items-center gap-2 font-semibold text-[#1E4E8C] transition-all hover:gap-3">
                 En savoir plus
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-[#0b1730] rounded-2xl p-6 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all group">
-                <div className="w-12 h-12 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#2563EB] transition-all">
-                  <Mail className="w-6 h-6 text-[#2563EB] group-hover:text-white transition-colors" />
+            <div className="space-y-6 lg:col-span-2">
+              <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
+                  <Mail className="h-6 w-6 text-[#1E4E8C] transition-colors group-hover:text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Intégration IA</h3>
-                <p className="text-[#8ea3c5] text-sm leading-relaxed">
+                <h3 className="mb-3 text-xl font-bold text-[#172033]">Intégration IA</h3>
+                <p className="text-sm leading-relaxed text-[#5E6B82]">
                   CRM, emails et outils automatisés
                 </p>
               </div>
 
-              <div className="bg-[#0b1730] rounded-2xl p-6 border border-white/10 hover:border-[#2563EB]/50 hover:shadow-xl hover:shadow-[#020817]/30 transition-all group">
-                <div className="w-12 h-12 bg-[#2563EB]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#2563EB] transition-all">
-                  <Workflow className="w-6 h-6 text-[#2563EB] group-hover:text-white transition-colors" />
+              <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
+                  <Workflow className="h-6 w-6 text-[#1E4E8C] transition-colors group-hover:text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Workflows sur mesure</h3>
-                <p className="text-[#8ea3c5] text-sm leading-relaxed">
+                <h3 className="mb-3 text-xl font-bold text-[#172033]">Workflows sur mesure</h3>
+                <p className="text-sm leading-relaxed text-[#5E6B82]">
                   Solutions adaptées à vos besoins
                 </p>
               </div>
@@ -221,44 +218,42 @@ export function HomeNew() {
         </div>
       </section>
 
-      {/* CHIFFRES SECTION */}
-      <section className="bg-[#091427] py-24">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="grid md:grid-cols-3 gap-12">
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="grid gap-12 md:grid-cols-3">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-5xl lg:text-6xl font-extrabold text-white mb-3">
+                <div className="mb-3 text-5xl font-extrabold text-[#172033] lg:text-6xl">
                   {stat.value}
                 </div>
-                <div className="text-white/60 text-lg">{stat.label}</div>
+                <div className="text-lg text-[#5E6B82]">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="bg-[#0a1428] py-24 lg:py-32">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+      <section className="bg-[#F7F9FC] py-24 lg:py-32">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
               Témoignages Clients
             </h2>
-            <p className="text-lg text-[#8ea3c5]">Ce que nos clients disent de nous</p>
+            <p className="text-lg text-[#5E6B82]">Ce que nos clients disent de nous</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-8 md:grid-cols-2">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-[#0f1b33] rounded-2xl p-8 border border-white/10">
-                <div className="text-[#2563EB] text-6xl mb-4 leading-none">"</div>
-                <p className="text-white text-lg italic mb-6 leading-relaxed">{testimonial.quote}</p>
+              <div key={index} className="rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)]">
+                <div className="mb-4 text-6xl leading-none text-[#1E4E8C]">"</div>
+                <p className="mb-6 text-lg italic leading-relaxed text-[#172033]">{testimonial.quote}</p>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#2563EB] to-[#60a5fa] rounded-full flex items-center justify-center text-white font-semibold">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#1E4E8C] to-[#D4A64A] font-semibold text-white">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div className="ml-4">
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-[#8ea3c5]">{testimonial.role} · {testimonial.company}</div>
+                    <div className="font-semibold text-[#172033]">{testimonial.name}</div>
+                    <div className="text-sm text-[#5E6B82]">{testimonial.role} • {testimonial.company}</div>
                   </div>
                 </div>
               </div>
@@ -267,38 +262,37 @@ export function HomeNew() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-[#081226] py-24 lg:py-32">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+      <section className="bg-[#EEF3F8] py-24 lg:py-32">
+        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="grid items-start gap-16 lg:grid-cols-2">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+              <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
                 Questions Fréquentes
               </h2>
-              <p className="text-lg text-[#8ea3c5] mb-8">
+              <p className="mb-8 text-lg text-[#5E6B82]">
                 Tout ce que vous devez savoir sur nos services
               </p>
-              <Link to="/faq" className="inline-flex items-center text-[#2563EB] font-semibold hover:gap-3 gap-2 transition-all">
+              <Link to="/faq" className="inline-flex items-center gap-2 font-semibold text-[#1E4E8C] transition-all hover:gap-3">
                 Voir toutes les questions
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="bg-[#0b1730] rounded-xl border border-white/10 overflow-hidden">
+                <div key={index} className="overflow-hidden rounded-xl border border-[#1E4E8C]/10 bg-white shadow-[0_18px_50px_rgba(30,78,140,0.08)]">
                   <button
-                    className="w-full px-6 py-5 flex items-center justify-between hover:bg-[#0f1b33] transition-colors text-left"
+                    className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-[#1E4E8C]/5"
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   >
-                    <span className="font-semibold text-white">{faq.question}</span>
+                    <span className="font-semibold text-[#172033]">{faq.question}</span>
                     <div className={`transform transition-transform ${openFaq === index ? "rotate-45" : ""}`}>
-                      <Check className="w-5 h-5 text-[#2563EB]" />
+                      <Check className="h-5 w-5 text-[#1E4E8C]" />
                     </div>
                   </button>
                   {openFaq === index && (
-                    <div className="px-6 pb-5 bg-[#0b1730]">
-                      <p className="text-[#8ea3c5] leading-relaxed">{faq.answer}</p>
+                    <div className="bg-white px-6 pb-5">
+                      <p className="leading-relaxed text-[#5E6B82]">{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -308,14 +302,13 @@ export function HomeNew() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="bg-[#050d1f] py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20" />
-        <div className="relative max-w-4xl mx-auto px-6 lg:px-10 text-center">
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6">
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,_#EEF3F8_0%,_#F7F9FC_100%)] py-24">
+        <div className="absolute left-1/2 top-1/2 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-10 blur-[150px]" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
+          <h2 className="mb-6 text-4xl font-extrabold text-[#172033] lg:text-5xl">
             Prêt à automatiser votre entreprise ?
           </h2>
-          <p className="text-xl text-white/65 mb-8">
+          <p className="mb-8 text-xl text-[#5E6B82]">
             Discutons de vos besoins et trouvons ensemble la solution adaptée
           </p>
           <Link to="/contact">

@@ -49,84 +49,89 @@ export function FAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <div className="overflow-hidden bg-[#050d1f] text-white">
-      {/* HERO */}
-      <section className="relative bg-[#050d1f] py-32 overflow-hidden">
+    <div className="overflow-hidden bg-[#F7F9FC] text-[#172033]">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)] py-32">
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-60"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)",
             backgroundSize: "50px 50px",
           }}
         />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20 animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-[#60a5fa] rounded-full blur-[150px] opacity-15 animate-float" style={{ animationDelay: "3s" }} />
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-12 blur-[150px] animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-[#D4A64A] opacity-10 blur-[150px] animate-float" style={{ animationDelay: "3s" }} />
 
-        <div className="relative max-w-[1280px] mx-auto px-6 lg:px-10 text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#2563EB]/30 bg-[#2563EB]/10 text-[#60a5fa] text-sm font-medium mb-8">
+        <div className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10">
+          <div className="mb-8 inline-flex items-center rounded-full border border-[#1E4E8C]/20 bg-white/80 px-4 py-2 text-sm font-medium text-[#1E4E8C] shadow-sm shadow-[#1E4E8C]/5">
             Vous avez des questions ?
           </div>
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-6">
+          <h1 className="mb-6 text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
             Questions{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#60a5fa] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">
               fréquentes
             </span>
           </h1>
-          <p className="text-lg text-white/65 max-w-3xl mx-auto leading-relaxed">
-            Tout ce que vous devez savoir sur l'automatisation IA et nos services
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[#5E6B82]">
+            Tout ce que vous devez savoir sur l'automatisation IA et nos services.
           </p>
         </div>
       </section>
 
-      {/* FAQ ACCORDÉON */}
-      <section className="bg-gradient-to-b from-[#050d1f] to-[#081226] py-24">
-        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+      {/* Accordion Section */}
+      <section className="bg-[#EEF3F8] py-24">
+        <div className="mx-auto max-w-4xl px-6 lg:px-10">
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-[#0b1730] rounded-xl border border-white/10 overflow-hidden hover:border-[#2563EB]/50 transition-colors"
+                className="overflow-hidden rounded-xl border border-[#1E4E8C]/10 bg-white shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-colors hover:border-[#1E4E8C]/30"
               >
                 <button
-                  className="w-full px-6 py-5 flex items-center justify-between hover:bg-[#0f1b33] transition-colors text-left"
+                  className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-[#1E4E8C]/5"
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 >
-                  <span className="font-semibold text-white pr-4">{faq.question}</span>
+                  <span className="pr-4 font-semibold text-[#172033]">{faq.question}</span>
                   <div
-                    className={`w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-all ${openFaq === index ? "bg-[#2563EB] border-[#2563EB] rotate-45" : ""}`}
+                    className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[#1E4E8C]/15 transition-all ${openFaq === index ? "rotate-45 bg-[#1E4E8C] border-[#1E4E8C]" : ""}`}
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M7 1v12M1 7h12" stroke={openFaq === index ? "#fff" : "#2563EB"} strokeWidth="2" strokeLinecap="round" />
+                      <path d="M7 1v12M1 7h12" stroke={openFaq === index ? "#fff" : "#1E4E8C"} strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </div>
                 </button>
-                {openFaq === index && (
-                  <div className="px-6 pb-6 bg-[#0b1730]">
-                    <p className="text-[#8ea3c5] leading-relaxed">{faq.answer}</p>
+                
+                <div 
+                  className={`grid transition-all duration-300 ease-in-out ${openFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="bg-white px-6 pb-6">
+                      <p className="leading-relaxed text-[#5E6B82]">{faq.answer}</p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-[#050d1f] py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#2563EB] rounded-full blur-[150px] opacity-20" />
-        <div className="relative max-w-4xl mx-auto px-6 lg:px-10 text-center">
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-6">
+      {/* CTA Section */}
+      <section className="relative overflow-hidden bg-[linear-gradient(180deg,_#EEF3F8_0%,_#F7F9FC_100%)] py-24">
+        <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1E4E8C] opacity-10 blur-[150px]" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
+          <h2 className="mb-6 text-4xl font-extrabold text-[#172033] lg:text-5xl">
             Vous avez d'autres questions ?
           </h2>
-          <p className="text-xl text-white/65 mb-8">
-            Notre équipe est là pour vous répondre dans les 24h
+          <p className="mb-8 text-xl text-[#5E6B82]">
+            Notre équipe est là pour vous répondre dans les 24h.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-[#2563EB] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#1d4ed8] transition-colors"
+            className="inline-flex items-center gap-2 rounded-full bg-[#1E4E8C] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#2F7A5F]"
           >
             Contactez-nous
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>

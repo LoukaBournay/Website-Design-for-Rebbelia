@@ -5,8 +5,8 @@ interface BadgeProps {
 
 export function Badge({ children, variant = "blue" }: BadgeProps) {
   const variants = {
-    blue: "bg-[#2563EB]/10 text-[#60a5fa] border border-[#2563EB]/20",
-    light: "bg-white/5 text-white/70 border border-white/10",
+    blue: "border border-[#1E4E8C]/15 bg-[#1E4E8C]/8 text-[#1E4E8C]",
+    light: "border border-[#1E4E8C]/10 bg-white/85 text-[#5E6B82] shadow-sm shadow-[#1E4E8C]/5",
   };
 
   return (
@@ -15,3 +15,4 @@ export function Badge({ children, variant = "blue" }: BadgeProps) {
     </div>
   );
 }
+

@@ -10,18 +10,18 @@ interface ServiceCardProps {
 
 export function ServiceCard({ icon: Icon, title, description, link }: ServiceCardProps) {
   return (
-    <div className="group bg-[#0b1730] border border-white/10 rounded-xl p-8 hover:shadow-xl hover:shadow-[#020817]/30 transition-all duration-300 hover:-translate-y-1">
-      <div className="w-14 h-14 bg-[#2563EB]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#2563EB] transition-colors duration-300">
-        <Icon className="w-7 h-7 text-[#2563EB] group-hover:text-white transition-colors duration-300" />
+    <div className="group rounded-xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]">
+      <div className="w-14 h-14 bg-[#1E4E8C]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1E4E8C] transition-colors duration-300">
+        <Icon className="w-7 h-7 text-[#1E4E8C] group-hover:text-white transition-colors duration-300" />
       </div>
 
-      <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
-      <p className="text-[#8ea3c5] mb-6 leading-relaxed">{description}</p>
+      <h3 className="mb-3 text-xl font-semibold text-[#172033]">{title}</h3>
+      <p className="mb-6 leading-relaxed text-[#5E6B82]">{description}</p>
 
       {link && (
         <Link
           to={link}
-          className="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors"
+          className="inline-flex items-center text-[#D4A64A] transition-colors hover:text-[#1E4E8C]"
         >
           En savoir plus
           <span className="ml-2">→</span>
@@ -30,3 +30,4 @@ export function ServiceCard({ icon: Icon, title, description, link }: ServiceCar
     </div>
   );
 }
+
