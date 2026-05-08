@@ -70,7 +70,7 @@ export function HomeNew() {
         <div className="relative mx-auto max-w-[1280px] px-6 py-32 lg:px-10">
           <div className="grid items-center gap-16 lg:grid-cols-2">
             <div className="space-y-8">
-              <Badge variant="light">Automatisation IA pour PME</Badge>
+              <Badge variant="light">Automatisation pour PME</Badge>
 
               <h1 className="animate-fade-in-up text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
                 Rebbelia{" "}

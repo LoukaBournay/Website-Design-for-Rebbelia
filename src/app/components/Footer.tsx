@@ -59,7 +59,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/45">
-          <p>&copy; 2026 Rebbelia. Tous droits réservés.</p>
+          <p>&copy; 2026 Rebbelia. Automatiser, Respirer.</p>
         </div>
       </div>
     </footer>

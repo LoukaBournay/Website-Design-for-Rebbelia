@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import Conditions_générales_de_ventes from "../assets/Conditions_générales_de_ventes.pdf";
+
 
 export function FooterDark() {
   return (
@@ -8,7 +10,7 @@ export function FooterDark() {
           <div>
             <div className="mb-4 text-2xl font-bold text-[#172033]">Rebbelia</div>
             <p className="leading-relaxed text-[#5E6B82]">
-              Tout client mérite une réponse
+              Automatiser, Respirer.
             </p>
           </div>
 
@@ -30,6 +32,9 @@ export function FooterDark() {
               <Link to="/legal" className="block text-[#5E6B82] transition-colors hover:text-[#1E4E8C]">
                 Mentions légales
               </Link>
+              <a href={ Conditions_générales_de_ventes } className="block text-[#5E6B82] transition-colors hover:text-[#1E4E8C]">
+                Conditions générales de ventes
+              </a>
             </div>
           </div>
 
