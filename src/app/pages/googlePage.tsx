@@ -24,7 +24,7 @@ export default function GoogleOAuth() {
   function startOAuth(type: "gmail" | "business") {
     // Définition des scopes selon le bouton cliqué
     const scopes = {
-      gmail: "openid email profile https://www.googleapis.com/auth/gmail.modify",
+      gmail: "openid email profile https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/business.manage",
       business: "openid email profile https://www.googleapis.com/auth/business.manage"
     };
 
@@ -70,7 +70,7 @@ export default function GoogleOAuth() {
         </button>
 
         {/* BOUTON GOOGLE BUSINESS */}
-        <button 
+        {/* <button 
           style={getButtonStyle("business")}
           onClick={() => startOAuth("business")}
           onMouseEnter={() => setHoveredButton("business")}
@@ -79,7 +79,7 @@ export default function GoogleOAuth() {
         >
           <GoogleIcon />
           Connecter Google Business
-        </button>
+        </button> */}
       </div>
 
       {status === "waiting" && (
