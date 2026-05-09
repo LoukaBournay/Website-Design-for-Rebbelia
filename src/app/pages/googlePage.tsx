@@ -24,7 +24,7 @@ export default function GoogleOAuth() {
   function startOAuth(type: "gmail" | "business") {
     // Définition des scopes selon le bouton cliqué
     const scopes = {
-      gmail: "openid email profile https://www.googleapis.com/auth/gmail.readonly",
+      gmail: "openid email profile https://www.googleapis.com/auth/gmail.modify",
       business: "openid email profile https://www.googleapis.com/auth/business.manage"
     };
 
