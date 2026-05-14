@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { Badge } from "../components/Badge";
 import { ButtonPrimary } from "../components/ButtonPrimary";
 import { GlassCard } from "../components/GlassCard";
-import { Bot, Zap, Workflow, Mail, ArrowRight, Check } from "lucide-react";
+import { Bot, Zap, Workflow, Mail, ArrowRight, Check, RefreshCw, Star, FileText, Users } from "lucide-react";
 import { useState } from "react";
 import WorkflowDiagram from "../components/WorkflowDiagram";
 
@@ -44,6 +44,21 @@ export function HomeNew() {
       question: "Combien de temps pour la mise en place ?",
       answer: "Entre 1 et 2 semaines pour des automatisations simples, 4 à 8 semaines pour des workflows complexes.",
     },
+  ];
+
+  const modules = [
+    { Icon: RefreshCw, slug: "relance-devis", name: "Relance automatique de devis",
+      features: ["Relance automatique par email", "Suivi des devis en attente", "SMS automatique (+20 €/mois)"],
+      installation: "349", subscription: "59" },
+    { Icon: Star, slug: "avis-google", name: "Réponse automatique aux avis Google",
+      features: ["Réponses automatiques", "Réponses personnalisées positives", "Alerte avis négatifs"],
+      installation: "349", subscription: "59" },
+    { Icon: FileText, slug: "facture-pdf", name: "Génération automatique de facture PDF",
+      features: ["Génération PDF", "Envoi automatique", "Archivage"],
+      installation: "399", subscription: "79" },
+    { Icon: Users, slug: "clients-inactifs", name: "Relance des clients inactifs",
+      features: ["Relance automatique", "SMS ou mail marketing", "Campagnes automatiques"],
+      installation: "799", subscription: "149" },
   ];
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -256,6 +271,72 @@ export function HomeNew() {
                     <div className="text-sm text-[#5E6B82]">{testimonial.role} • {testimonial.company}</div>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[radial-gradient(ellipse_at_top_left,_rgba(30,78,140,0.08)_0%,_transparent_55%),radial-gradient(ellipse_at_bottom_right,_rgba(212,166,74,0.07)_0%,_transparent_55%),#F7F9FC] py-36 lg:py-44">
+        <div className="absolute -left-40 -top-20 h-[600px] w-[600px] rounded-full bg-[#1E4E8C] opacity-[0.06] blur-[140px]" />
+        <div className="absolute -bottom-20 -right-40 h-[600px] w-[600px] rounded-full bg-[#D4A64A] opacity-[0.06] blur-[140px]" />
+
+        <div className="relative mx-auto max-w-[1280px] px-6 lg:px-10">
+          <div className="mb-20 text-center">
+            <span className="mb-6 inline-block rounded-full border border-[#1E4E8C]/20 bg-[#1E4E8C]/08 px-5 py-1.5 text-sm font-semibold text-[#1E4E8C]">
+              Tarifs transparents
+            </span>
+            <h2 className="mb-5 text-5xl font-extrabold leading-tight text-[#172033] lg:text-6xl">
+              Nos modules & tarifs
+            </h2>
+            <p className="mx-auto max-w-2xl text-xl text-[#5E6B82]">
+              Un paiement d'installation unique, puis un abonnement mensuel. Sans engagement.
+            </p>
+          </div>
+
+          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+            {modules.map((module, i) => (
+              <div
+                key={i}
+                className="group relative flex flex-col overflow-hidden rounded-2xl bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.10)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_28px_70px_rgba(30,78,140,0.18)]"
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A]" />
+
+                <div className="mb-5 inline-flex items-center justify-center rounded-xl bg-[#EEF3FB] p-3 self-start">
+                  <module.Icon size={24} className="text-[#1E4E8C]" />
+                </div>
+
+                <h3 className="mb-5 text-lg font-bold leading-snug text-[#172033]">
+                  {module.name}
+                </h3>
+
+                <ul className="mb-8 flex-1 space-y-3">
+                  {module.features.map((f, fi) => (
+                    <li key={fi} className="flex items-start gap-2.5 text-sm text-[#5E6B82]">
+                      <Check size={15} className="mt-0.5 shrink-0 text-[#2F7A5F]" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="border-t border-[#E2E8F0] pt-5">
+                  <div className="mb-1.5 flex items-baseline gap-1.5">
+                    <span className="text-3xl font-extrabold text-[#172033]">{module.installation} €</span>
+                    <span className="text-xs font-medium text-[#5E6B82]">installation</span>
+                  </div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-xl font-bold text-[#1E4E8C]">{module.subscription} €</span>
+                    <span className="text-xs font-medium text-[#5E6B82]">/mois</span>
+                  </div>
+                </div>
+
+                <Link
+                  to={`/contact/${module.slug}`}
+                  className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#1E4E8C] py-3.5 text-sm font-semibold text-white transition-colors duration-200 group-hover:bg-[#D4A64A]"
+                >
+                  Démarrer
+                  <ArrowRight size={15} />
+                </Link>
               </div>
             ))}
           </div>

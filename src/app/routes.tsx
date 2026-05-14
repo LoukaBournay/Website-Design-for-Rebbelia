@@ -8,6 +8,7 @@ import { Contact } from "./pages/Contact";
 import { FAQ } from "./pages/FAQ";
 import { Legal } from "./pages/Legal";
 import GoogleOAuth from "./pages/googlePage";
+import { ContactModule } from "./pages/ContactModule";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "about", Component: About },
       { path: "testimonials", Component: Testimonials },
       { path: "contact", Component: Contact },
+      { path: "contact/:moduleSlug", Component: ContactModule },
       { path: "faq", Component: FAQ },
       { path: "legal", Component: Legal },
       { path: "googleConnection", Component: GoogleOAuth },
