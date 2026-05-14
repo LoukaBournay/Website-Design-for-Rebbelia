@@ -69,7 +69,7 @@ export function Legal() {
                   <Row label="Nom" value="Marwan Rachedi" />
                   <Row label="Statut" value="Auto-entrepreneur (Entreprise Individuelle)" />
                   <Row label="Nom commercial" value="Rebbelia" />
-                  <Row label="Numéro SIRET" value="En cours d'immatriculation — à compléter" highlight />
+                  <Row label="Numéro SIRET" value="92997221400027" />
                   <Row label="Adresse" value="11 rue du docteur Robert, 38230 Pont-de-Chéruy — France" />
                   <Row label="Email" value="rebbelia@rebbelia.com" />
                   <Row label="Site web" value="https://www.rebbelia.com" />
