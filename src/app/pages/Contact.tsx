@@ -11,7 +11,14 @@ type Answers = {
 };
 
 const choices = {
-  need: ["Tri d'emails ou réponse assistée", "Répondre aux demandes de devis", "Gérer les avis, relances ou le CRM", "Un autre besoin"],
+  need: [
+    "Trier mes emails et ne rien oublier",
+    "Répondre à mes demandes de devis",
+    "Répondre à mes avis Google",
+    "Relancer automatiquement mes clients",
+    "Mettre à jour mon CRM et suivre mes clients",
+    "Un autre besoin",
+  ],
   volume: ["Moins de 10 demandes par semaine", "Entre 10 et 50 demandes par semaine", "Plus de 50 demandes par semaine"],
   tools: ["Gmail", "Outlook", "Google Sheets", "Notion", "Google Business Profile", "HubSpot", "Pipedrive", "Slack", "WhatsApp", "Autre outil"],
 };
@@ -24,7 +31,7 @@ export function Contact() {
   const [error, setError] = useState("");
 
   const estimate = useMemo(() => {
-    if (answers.need === "Tri d'emails ou réponse assistée" && answers.tools.length <= 2) return { name: "Automatisation Essentielle", setup: "500 €", monthly: "49 €/mois" };
+    if (answers.need === "Trier mes emails et ne rien oublier" && answers.tools.length <= 2) return { name: "Automatisation Essentielle", setup: "500 €", monthly: "49 €/mois" };
     if (answers.need !== "Un autre besoin" && answers.tools.length <= 3) return { name: "Automatisation Métier", setup: "900 à 1 500 €", monthly: "99 €/mois" };
     return { name: "Automatisation Sur mesure", setup: "À partir de 2 000 €", monthly: "149 à 249 €/mois" };
   }, [answers]);
