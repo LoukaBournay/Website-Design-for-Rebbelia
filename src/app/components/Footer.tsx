@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { Mail, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -22,14 +21,11 @@ export function Footer() {
               <Link to="/about" className="block text-white/45 hover:text-white transition-colors">
                 À propos
               </Link>
-              <Link to="/testimonials" className="block text-white/45 hover:text-white transition-colors">
-                Témoignages
-              </Link>
               <Link to="/faq" className="block text-white/45 hover:text-white transition-colors">
                 FAQ
               </Link>
               <Link to="/legal" className="block text-white/45 hover:text-white transition-colors">
-                Legal
+                Mentions légales & confidentialité
               </Link>
             </div>
           </div>

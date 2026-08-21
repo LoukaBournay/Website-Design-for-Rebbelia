@@ -1,317 +1,54 @@
 import { Link } from "react-router";
-import { Badge } from "../components/Badge";
-import { ButtonPrimary } from "../components/ButtonPrimary";
-import { GlassCard } from "../components/GlassCard";
-import { Bot, Zap, Workflow, Mail, ArrowRight, Check } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Bot, FileText, Mail, MessageSquareText, ShieldCheck, Workflow } from "lucide-react";
 import WorkflowDiagram from "../components/WorkflowDiagram";
 
+const services = [
+  { icon: FileText, title: "Demandes de devis", text: "Centralisez les demandes, extrayez les informations utiles et préparez la bonne réponse sans perdre de temps." },
+  { icon: MessageSquareText, title: "Avis Google et emails", text: "Proposez des réponses adaptées à votre ton, avec validation humaine lorsque vous le souhaitez." },
+  { icon: Workflow, title: "Relances, CRM et suivi", text: "Synchronisez vos outils, relancez au bon moment et gardez vos données clients à jour." },
+];
+
+const steps = [
+  ["01", "Nous écoutons", "Vous nous présentez la tâche qui vous prend du temps et les outils que vous utilisez."],
+  ["02", "Nous concevons", "Nous préparons une solution sur mesure, simple à comprendre et à utiliser."],
+  ["03", "Nous déployons", "Nous testons l'automatisation avec vous avant sa mise en production."],
+  ["04", "Nous suivons", "Nous restons disponibles pour la maintenance et les évolutions."],
+];
+
 export function HomeNew() {
-  // Remplacement de la ligne existante par celle-ci :
-  const integrations = ["Make", "OpenAI", "Notion", "WhatsApp", "Stripe", "Outlook"];
-
-  const stats = [
-    { value: "3x plus vite", label: "Temps de réponse moyen" },
-    { value: "0 réponse ratée", label: "Taux de satisfaction" },
-    { value: "100% sur mesure", label: "Solutions adaptées" },
-  ];
-
-  const testimonials = [
-    {
-      quote: "Rebbelia a transformé notre gestion client. Grâce à l'automatisation de nos emails et CRM, nous répondons 3 fois plus vite.",
-      name: "Pierre Dubois",
-      company: "TechStart",
-      role: "CEO",
-    },
-    {
-      quote: "L'équipe est professionnelle et à l'écoute. Notre productivité a augmenté de 40% en quelques semaines seulement.",
-      name: "Claire Moreau",
-      company: "InnovateCo",
-      role: "COO",
-    },
-  ];
-
-  const faqs = [
-    {
-      question: "Qu'est-ce que l'automatisation IA ?",
-      answer: "L'automatisation IA consiste à utiliser l'intelligence artificielle pour automatiser vos tâches répétitives. Cela permet de gagner du temps et de réduire les erreurs.",
-    },
-    {
-      question: "Combien de temps pour la mise en place ?",
-      answer: "Entre 1 et 2 semaines pour des automatisations simples, 4 à 8 semaines pour des workflows complexes.",
-    },
-  ];
-
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   return (
     <div className="overflow-hidden bg-[#F7F9FC] text-[#172033]">
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)]">
-        <div className="absolute inset-0 opacity-60">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)",
-              backgroundSize: "50px 50px",
-            }}
-          />
-        </div>
-
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-12 blur-[150px] animate-float" />
-        <div
-          className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[#D4A64A] opacity-10 blur-[150px] animate-float"
-          style={{ animationDelay: "3s" }}
-        />
-
-        <div className="relative mx-auto max-w-[1280px] px-6 py-32 lg:px-10">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            <div className="space-y-8">
-              <Badge variant="light">Automatisation pour PME</Badge>
-
-              <h1 className="animate-fade-in-up text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
-                Rebbelia{" "}
-                <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">
-                  Automatiser, Respirer.
-                </span>
-              </h1>
-
-              <p className="animate-fade-in-up animate-delay-200 text-lg leading-relaxed text-[#5E6B82]">
-                On automatise vos réponses clients pour que vous n'en ratiez plus aucune. Gagnez du temps, améliorez la satisfaction et concentrez-vous sur l'essentiel.
-              </p>
-
-              <div className="animate-fade-in-up animate-delay-400 flex flex-col gap-4 sm:flex-row">
-                <Link to="/contact">
-                  <ButtonPrimary variant="solid">Démarrer maintenant</ButtonPrimary>
-                </Link>
-                <Link to="/services">
-                  <ButtonPrimary variant="outline">Découvrir nos services</ButtonPrimary>
-                </Link>
-              </div>
+      <section className="relative flex min-h-[calc(100vh-5rem)] items-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)]">
+        <div className="absolute inset-0 opacity-60" style={{ backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)", backgroundSize: "50px 50px" }} />
+        <div className="relative mx-auto grid max-w-[1280px] items-center gap-14 px-6 py-24 lg:grid-cols-2 lg:px-10">
+          <div>
+            <p className="mb-6 inline-flex rounded-full border border-[#1E4E8C]/20 bg-white/80 px-4 py-2 text-sm font-semibold text-[#1E4E8C] shadow-sm">Automatisation IA pour TPE & PME</p>
+            <h1 className="text-5xl font-extrabold leading-[1.05] lg:text-7xl">Automatisez vos tâches répétitives. <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">Concentrez-vous sur votre entreprise.</span></h1>
+            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[#5E6B82]">Rebbelia crée des automatisations IA sur mesure pour vos emails, devis, relances, avis clients et outils de suivi.</p>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white shadow-lg shadow-[#1E4E8C]/20 transition hover:bg-[#23589D]">Recevoir un audit gratuit <ArrowRight className="h-5 w-5" /></Link>
+              <Link to="/services" className="inline-flex items-center justify-center rounded-full border border-[#1E4E8C]/20 bg-white px-7 py-4 font-semibold text-[#1E4E8C] transition hover:bg-[#1E4E8C]/5">Voir les automatisations</Link>
             </div>
-
-            <div className="relative animate-fade-in-up animate-delay-400">
-              <GlassCard className="p-8 lg:p-12">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
-                    <Bot className="mb-2 h-12 w-12 text-[#D4A64A]" />
-                    <span className="text-sm text-[#5E6B82]">RPA</span>
-                  </div>
-                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
-                    <Zap className="mb-2 h-12 w-12 text-[#D4A64A]" />
-                    <span className="text-sm text-[#5E6B82]">IA Rapide</span>
-                  </div>
-                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
-                    <Workflow className="mb-2 h-12 w-12 text-[#D4A64A]" />
-                    <span className="text-sm text-[#5E6B82]">Workflows</span>
-                  </div>
-                  <div className="flex h-32 flex-col items-center justify-center rounded-2xl bg-white/80 p-6 shadow-sm transition-all hover:bg-white">
-                    <Mail className="mb-2 h-12 w-12 text-[#D4A64A]" />
-                    <span className="text-sm text-[#5E6B82]">CRM & Email</span>
-                  </div>
-                </div>
-              </GlassCard>
+          </div>
+          <div className="rounded-[32px] border border-[#1E4E8C]/10 bg-white/80 p-8 shadow-[0_30px_80px_rgba(30,78,140,0.14)] backdrop-blur lg:p-10">
+            <div className="grid grid-cols-2 gap-5">
+              {[[Bot, "IA utile", "Des réponses adaptées à votre activité"], [Mail, "Emails", "Aucune demande oubliée"], [FileText, "Devis", "Des informations bien préparées"], [Workflow, "Outils connectés", "Un suivi sans ressaisie"]].map(([Icon, title, text]) => {
+                const CardIcon = Icon as typeof Bot;
+                return <div key={title as string} className="rounded-2xl bg-[#F7F9FC] p-5"><CardIcon className="mb-5 h-9 w-9 text-[#D4A64A]" /><p className="font-bold">{title as string}</p><p className="mt-1 text-sm text-[#5E6B82]">{text as string}</p></div>;
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF3F8] py-16">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <p className="mb-8 text-center text-sm uppercase tracking-wider text-[#5E6B82]">Nos intégrations</p>
-          <div className="flex flex-wrap items-center justify-center gap-12">
-            {integrations.map((integration) => (
-              <div
-                key={integration}
-                className="text-lg font-semibold text-[#5E6B82] opacity-60 transition-opacity hover:opacity-100"
-              >
-                {integration}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="bg-white py-20 lg:py-28"><div className="mx-auto max-w-[1280px] px-6 lg:px-10"><div className="mx-auto max-w-3xl text-center"><p className="font-semibold text-[#1E4E8C]">DES RÉSULTATS MÉTIER, PAS DU JARGON</p><h2 className="mt-4 text-4xl font-bold lg:text-5xl">Les automatisations qui vous font vraiment gagner du temps</h2><p className="mt-5 text-lg text-[#5E6B82]">Nous partons de vos tâches quotidiennes et de vos outils existants pour créer une solution utile dès le premier jour.</p></div><div className="mt-14 grid gap-6 md:grid-cols-3">{services.map((service) => <article key={service.title} className="rounded-2xl border border-[#1E4E8C]/10 bg-[#F7F9FC] p-8"><service.icon className="h-10 w-10 text-[#D4A64A]" /><h3 className="mt-6 text-xl font-bold">{service.title}</h3><p className="mt-3 leading-relaxed text-[#5E6B82]">{service.text}</p><Link className="mt-6 inline-flex items-center gap-2 font-semibold text-[#1E4E8C]" to="/services">En savoir plus <ArrowRight className="h-4 w-4" /></Link></article>)}</div></div></section>
 
-      <section className="bg-[#F7F9FC] pb-24 lg:pb-28">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="mb-12 text-center">
-            <Badge variant="blue">Maquette visuelle</Badge>
-            <h2 className="mt-5 text-4xl font-bold text-[#172033] lg:text-5xl">
-              Exemple d'automatisation email
-            </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-[#5E6B82]">
-              Une carte statique pour montrer comment une automatisation peut lire un email, analyser
-              le contexte et envoyer la bonne réponse sans intervention manuelle.
-            </p>
-          </div>
+      <section className="bg-[#EEF3F8] py-20 lg:py-28"><div className="mx-auto max-w-[1280px] px-6 lg:px-10"><div className="text-center"><p className="font-semibold text-[#1E4E8C]">EXEMPLE CONCRET</p><h2 className="mt-4 text-4xl font-bold lg:text-5xl">Une demande de devis traitée en quelques étapes</h2><p className="mx-auto mt-5 max-w-3xl text-lg text-[#5E6B82]">La réponse peut être envoyée automatiquement ou soumise à votre validation : vous gardez toujours la main.</p></div><div className="mt-12 rounded-[32px] border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_30px_80px_rgba(30,78,140,0.12)] lg:p-10"><WorkflowDiagram /></div></div></section>
 
-          <div className="relative overflow-hidden rounded-[32px] border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_30px_80px_rgba(30,78,140,0.12)] lg:p-10">
-            <div
-              className="absolute inset-0 opacity-40"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(30,78,140,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.05) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            <div className="absolute -top-16 right-16 h-40 w-40 rounded-full bg-[#1E4E8C]/10 blur-3xl" />
-            <div className="absolute -bottom-10 left-14 h-32 w-32 rounded-full bg-[#2F7A5F]/10 blur-3xl" />
+      <section className="bg-white py-20 lg:py-28"><div className="mx-auto max-w-[1280px] px-6 lg:px-10"><div className="text-center"><p className="font-semibold text-[#1E4E8C]">NOTRE MÉTHODE</p><h2 className="mt-4 text-4xl font-bold lg:text-5xl">Simple, claire et sur mesure</h2></div><div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">{steps.map(([number, title, text]) => <div key={number} className="rounded-2xl border border-[#1E4E8C]/10 p-7"><span className="text-sm font-bold text-[#D4A64A]">{number}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="mt-3 leading-relaxed text-[#5E6B82]">{text}</p></div>)}</div></div></section>
 
-            <div className="relative z-10 mx-auto max-w-[1120px] py-6">
-              <WorkflowDiagram />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#EEF3F8] py-24 lg:py-32">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
-              Nos Services
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-[#5E6B82]">
-              Des solutions d'automatisation IA sur mesure pour votre entreprise
-            </p>
-          </div>
-
-          <div className="grid gap-6 lg:grid-cols-5">
-            <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)] lg:col-span-3 lg:p-10">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
-                <Bot className="h-8 w-8 text-[#1E4E8C] transition-colors group-hover:text-white" />
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-[#172033]">Automatisation RPA</h3>
-              <p className="mb-6 leading-relaxed text-[#5E6B82]">
-                Automatisez vos tâches répétitives grâce à la Robotic Process Automation. Réduisez les erreurs humaines et libérez du temps pour vos équipes.
-              </p>
-              <Link to="/services" className="inline-flex items-center gap-2 font-semibold text-[#1E4E8C] transition-all hover:gap-3">
-                En savoir plus
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-
-            <div className="space-y-6 lg:col-span-2">
-              <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
-                  <Mail className="h-6 w-6 text-[#1E4E8C] transition-colors group-hover:text-white" />
-                </div>
-                <h3 className="mb-3 text-xl font-bold text-[#172033]">Intégration IA</h3>
-                <p className="text-sm leading-relaxed text-[#5E6B82]">
-                  CRM, emails et outils automatisés
-                </p>
-              </div>
-
-              <div className="group rounded-2xl border border-[#1E4E8C]/10 bg-white p-6 shadow-[0_18px_50px_rgba(30,78,140,0.08)] transition-all hover:border-[#1E4E8C]/30 hover:shadow-[0_24px_60px_rgba(30,78,140,0.14)]">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1E4E8C]/10 transition-all group-hover:bg-[#1E4E8C]">
-                  <Workflow className="h-6 w-6 text-[#1E4E8C] transition-colors group-hover:text-white" />
-                </div>
-                <h3 className="mb-3 text-xl font-bold text-[#172033]">Workflows sur mesure</h3>
-                <p className="text-sm leading-relaxed text-[#5E6B82]">
-                  Solutions adaptées à vos besoins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="grid gap-12 md:grid-cols-3">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-3 text-5xl font-extrabold text-[#172033] lg:text-6xl">
-                  {stat.value}
-                </div>
-                <div className="text-lg text-[#5E6B82]">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#F7F9FC] py-24 lg:py-32">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
-              Témoignages Clients
-            </h2>
-            <p className="text-lg text-[#5E6B82]">Ce que nos clients disent de nous</p>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)]">
-                <div className="mb-4 text-6xl leading-none text-[#1E4E8C]">"</div>
-                <p className="mb-6 text-lg italic leading-relaxed text-[#172033]">{testimonial.quote}</p>
-                <div className="flex items-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#1E4E8C] to-[#D4A64A] font-semibold text-white">
-                    {testimonial.name.charAt(0)}
-                  </div>
-                  <div className="ml-4">
-                    <div className="font-semibold text-[#172033]">{testimonial.name}</div>
-                    <div className="text-sm text-[#5E6B82]">{testimonial.role} • {testimonial.company}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#EEF3F8] py-24 lg:py-32">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="grid items-start gap-16 lg:grid-cols-2">
-            <div>
-              <h2 className="mb-4 text-4xl font-bold text-[#172033] lg:text-5xl">
-                Questions Fréquentes
-              </h2>
-              <p className="mb-8 text-lg text-[#5E6B82]">
-                Tout ce que vous devez savoir sur nos services
-              </p>
-              <Link to="/faq" className="inline-flex items-center gap-2 font-semibold text-[#1E4E8C] transition-all hover:gap-3">
-                Voir toutes les questions
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <div key={index} className="overflow-hidden rounded-xl border border-[#1E4E8C]/10 bg-white shadow-[0_18px_50px_rgba(30,78,140,0.08)]">
-                  <button
-                    className="flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-[#1E4E8C]/5"
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  >
-                    <span className="font-semibold text-[#172033]">{faq.question}</span>
-                    <div className={`transform transition-transform ${openFaq === index ? "rotate-45" : ""}`}>
-                      <Check className="h-5 w-5 text-[#1E4E8C]" />
-                    </div>
-                  </button>
-                  {openFaq === index && (
-                    <div className="bg-white px-6 pb-5">
-                      <p className="leading-relaxed text-[#5E6B82]">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-[linear-gradient(180deg,_#EEF3F8_0%,_#F7F9FC_100%)] py-24">
-        <div className="absolute left-1/2 top-1/2 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-10 blur-[150px]" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
-          <h2 className="mb-6 text-4xl font-extrabold text-[#172033] lg:text-5xl">
-            Prêt à automatiser votre entreprise ?
-          </h2>
-          <p className="mb-8 text-xl text-[#5E6B82]">
-            Discutons de vos besoins et trouvons ensemble la solution adaptée
-          </p>
-          <Link to="/contact">
-            <ButtonPrimary variant="solid">Contactez-nous</ButtonPrimary>
-          </Link>
-        </div>
-      </section>
+      <section className="bg-[#EEF3F8] py-20"><div className="mx-auto grid max-w-[1100px] gap-8 px-6 lg:grid-cols-[auto_1fr] lg:items-center"><ShieldCheck className="h-14 w-14 text-[#2F7A5F]" /><div><h2 className="text-3xl font-bold">Vos outils et vos données sont traités avec soin.</h2><p className="mt-3 leading-relaxed text-[#5E6B82]">Chaque projet est conçu avec des accès sécurisés, une documentation claire et un suivi technique adapté à votre activité.</p></div></div></section>
+      <section className="bg-[#172033] py-20 text-white"><div className="mx-auto max-w-3xl px-6 text-center"><h2 className="text-4xl font-extrabold">Quelle tâche pourriez-vous arrêter de faire demain ?</h2><p className="mt-5 text-lg text-white/70">Parlez-nous de votre fonctionnement : nous identifierons les automatisations les plus pertinentes.</p><Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#D4A64A] px-7 py-4 font-semibold text-[#172033] transition hover:bg-[#e2b75f]">Parler de votre projet <ArrowRight className="h-5 w-5" /></Link></div></section>
     </div>
   );
 }

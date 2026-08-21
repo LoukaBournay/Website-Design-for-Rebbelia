@@ -21,7 +21,6 @@ export function Navbar() {
     { to: "/", label: "Accueil" },
     { to: "/services", label: "Services" },
     { to: "/about", label: "À propos" },
-    { to: "/testimonials", label: "Témoignages" },
     { to: "/faq", label: "FAQ" },
   ];
 
@@ -54,7 +53,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link to="/contact">
-              <Button>Nous contacter</Button>
+              <Button>Parler de votre projet</Button>
             </Link>
           </div>
 
@@ -83,7 +82,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full">Nous contacter</Button>
+              <Button className="w-full">Parler de votre projet</Button>
             </Link>
           </div>
         )}
