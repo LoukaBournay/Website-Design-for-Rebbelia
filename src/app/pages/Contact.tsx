@@ -1,234 +1,109 @@
-import { useState } from "react";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+
+type Answers = {
+  need: string;
+  volume: string;
+  tools: string;
+  name: string;
+  email: string;
+  company: string;
+};
+
+const choices = {
+  need: ["Répondre aux demandes de devis", "Gérer les emails ou avis Google", "Relancer et suivre mes clients", "Un autre besoin"],
+  volume: ["Moins de 10 demandes par semaine", "Entre 10 et 50 demandes par semaine", "Plus de 50 demandes par semaine"],
+  tools: ["Un ou deux outils", "Plusieurs outils à connecter", "Je ne sais pas encore"],
+};
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  });
-
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Answers>({ need: "", volume: "", tools: "", name: "", email: "", company: "" });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const estimate = useMemo(() => {
+    let score = 0;
+    if (answers.volume.includes("10 et 50")) score += 1;
+    if (answers.volume.includes("Plus de 50")) score += 2;
+    if (answers.tools.includes("Plusieurs")) score += 2;
+    if (answers.need === "Un autre besoin") score += 1;
+    if (score <= 1) return "490 à 990 €";
+    if (score <= 3) return "990 à 1 990 €";
+    return "1 990 à 3 900 €";
+  }, [answers]);
+
+  const next = () => setStep((current) => current + 1);
+  const previous = () => setStep((current) => Math.max(0, current - 1));
+  const choose = (field: "need" | "volume" | "tools", value: string) => {
+    setAnswers((current) => ({ ...current, [field]: value }));
+    window.setTimeout(next, 180);
+  };
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setIsSubmitting(true);
-    setSubmitError("");
-
+    setError("");
     try {
       const response = await fetch("https://formspree.io/f/xgodazvg", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          nom: answers.name,
+          email: answers.email,
+          entreprise: answers.company,
+          besoin: answers.need,
+          volume: answers.volume,
+          outils: answers.tools,
+          estimation_indicative: estimate,
+        }),
       });
-
-      if (!response.ok) {
-        throw new Error("L'envoi du formulaire a échoué");
-      }
-
+      if (!response.ok) throw new Error("Envoi impossible");
       setSubmitted(true);
-      setFormData({ name: "", email: "", company: "", message: "" });
-
-      // Réinitialise le statut de succès après 5 secondes pour permettre un nouvel envoi
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 5000);
-    } catch (error) {
-      setSubmitError("Une erreur est survenue. Merci de réessayer ou de nous écrire directement par email.");
+    } catch {
+      setError("Une erreur est survenue. Vous pouvez aussi nous écrire à rebbelia@rebbelia.com.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const progress = Math.round(((step + 1) / 4) * 100);
 
   return (
-    <div className="overflow-hidden bg-[#F7F9FC] text-[#172033]">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)] py-32">
-        <div
-          className="absolute inset-0 opacity-60"
-          style={{
-            backgroundImage: "linear-gradient(rgba(30,78,140,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,78,140,0.06) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#1E4E8C] opacity-12 blur-[150px] animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-[#D4A64A] opacity-10 blur-[150px] animate-float" style={{ animationDelay: "3s" }} />
-
-        <div className="relative mx-auto max-w-[1280px] px-6 text-center lg:px-10">
-          <div className="mb-8 inline-flex items-center rounded-full border border-[#1E4E8C]/20 bg-white/80 px-4 py-2 text-sm font-medium text-[#1E4E8C] shadow-sm shadow-[#1E4E8C]/5">
-            Devis gratuit & sans engagement
-          </div>
-          <h1 className="mb-6 text-5xl font-extrabold leading-[1.05] text-[#172033] lg:text-7xl">
-            Parlons de{" "}
-            <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">
-              votre projet
-            </span>
-          </h1>
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[#5E6B82]">
-            Prêt à automatiser votre entreprise ? Chaque projet est unique — contactez-nous pour une solution sur mesure.
-          </p>
+    <div className="min-h-screen bg-[#F7F9FC] text-[#172033]">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(30,78,140,0.14),_transparent_34%),linear-gradient(180deg,_#F7F9FC_0%,_#EEF3F8_100%)] py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#1E4E8C]/20 bg-white/80 px-4 py-2 text-sm font-semibold text-[#1E4E8C]"><Sparkles className="h-4 w-4" /> Estimation gratuite</p>
+          <h1 className="mt-6 text-4xl font-extrabold leading-tight lg:text-6xl">Parlons de votre <span className="bg-gradient-to-r from-[#1E4E8C] to-[#D4A64A] bg-clip-text text-transparent">automatisation.</span></h1>
+          <p className="mt-5 text-lg text-[#5E6B82]">Répondez à quelques questions simples. Cela prend moins de deux minutes.</p>
         </div>
       </section>
 
-      {/* Main Contact Section */}
-      <section className="bg-[#EEF3F8] py-24">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-2">
-            
-            {/* Contact Info */}
-            <div>
-              <h2 className="mb-4 text-3xl font-bold text-[#172033] lg:text-4xl">
-                On vous répond sous 24h
-              </h2>
-              <p className="mb-10 leading-relaxed text-[#5E6B82]">
-                Chaque projet est unique. Contactez-nous pour un devis personnalisé adapté à vos besoins et à votre budget.
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-[#1E4E8C]/20 bg-white">
-                    <Mail className="h-6 w-6 text-[#D4A64A]" />
-                  </div>
-                  <div>
-                    <h3 className="mb-1 font-semibold text-[#172033]">Email</h3>
-                    <p className="text-[#5E6B82]">rebbelia@rebbelia.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-[#1E4E8C]/20 bg-white">
-                    <Phone className="h-6 w-6 text-[#D4A64A]" />
-                  </div>
-                  <div>
-                    <h3 className="mb-1 font-semibold text-[#172033]">Téléphone</h3>
-                    <p className="text-[#5E6B82]">+33 7 82 39 43 68</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-[#1E4E8C]/20 bg-white">
-                    <MapPin className="h-6 w-6 text-[#D4A64A]" />
-                  </div>
-                  <div>
-                    <h3 className="mb-1 font-semibold text-[#172033]">Adresse</h3>
-                    <p className="text-[#5E6B82]">11 rue du Docteur Robert, 38230 Pont-de-Chéruy — France</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Form Card */}
-            <div className="rounded-2xl border border-[#1E4E8C]/10 bg-white p-8 shadow-[0_18px_50px_rgba(30,78,140,0.08)] lg:p-10">
-              {submitted ? (
-                <div className="py-12 text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                    <svg className="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="mb-2 text-2xl font-bold text-[#172033]">Message envoyé !</h3>
-                  <p className="text-[#5E6B82]">Merci pour votre confiance. Nous vous répondrons dans les plus brefs délais.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-semibold text-[#172033]">
-                      Nom complet
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full rounded-xl border border-[#1E4E8C]/15 bg-[#F7F9FC] px-4 py-3 text-[#172033] transition-all placeholder-[#5E6B82] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]"
-                      placeholder="Jean Dupont"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[#172033]">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full rounded-xl border border-[#1E4E8C]/15 bg-[#F7F9FC] px-4 py-3 text-[#172033] transition-all placeholder-[#5E6B82] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]"
-                      placeholder="jean@entreprise.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="mb-2 block text-sm font-semibold text-[#172033]">
-                      Entreprise
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      required
-                      className="w-full rounded-xl border border-[#1E4E8C]/15 bg-[#F7F9FC] px-4 py-3 text-[#172033] transition-all placeholder-[#5E6B82] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]"
-                      placeholder="Nom de votre entreprise"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-semibold text-[#172033]">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="min-h-36 w-full resize-none rounded-xl border border-[#1E4E8C]/15 bg-[#F7F9FC] px-4 py-3 text-[#172033] transition-all placeholder-[#5E6B82] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]"
-                      placeholder="Décrivez votre projet..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#23589D] disabled:opacity-70"
-                  >
-                    {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
-                    <ArrowRight className="h-5 w-5" />
-                  </button>
-
-                  {submitError && (
-                    <p className="text-center text-sm text-[#EF4444]">
-                      {submitError}
-                    </p>
-                  )}
-
-                  <p className="text-center text-xs text-[#5E6B82]">
-                    Devis gratuit · Réponse sous 24h · Sans engagement
-                  </p>
-                </form>
-              )}
-            </div>
-          </div>
+      <section className="px-6 py-14 lg:py-20">
+        <div className="mx-auto max-w-2xl rounded-3xl border border-[#1E4E8C]/10 bg-white p-7 shadow-[0_20px_60px_rgba(30,78,140,0.1)] sm:p-10">
+          {submitted ? (
+            <div className="py-10 text-center"><CheckCircle2 className="mx-auto h-16 w-16 text-[#2F7A5F]" /><h2 className="mt-6 text-3xl font-bold">Demande envoyée !</h2><p className="mt-4 text-[#5E6B82]">Merci {answers.name}. Nous étudions votre besoin et revenons vers vous avec une proposition adaptée.</p></div>
+          ) : (
+            <>
+              <div className="mb-10"><div className="mb-3 flex justify-between text-sm font-medium text-[#5E6B82]"><span>Question {step + 1} sur 4</span><span>{progress}%</span></div><div className="h-2 overflow-hidden rounded-full bg-[#EEF3F8]"><div className="h-full rounded-full bg-[#1E4E8C] transition-all duration-300" style={{ width: `${progress}%` }} /></div></div>
+              {step === 0 && <Question title="Que souhaitez-vous automatiser ?" subtitle="Choisissez le besoin le plus proche de votre situation." options={choices.need} value={answers.need} onChoose={(value) => choose("need", value)} />}
+              {step === 1 && <Question title="Quel est le volume à traiter ?" subtitle="Une estimation suffit : nous affinerons ensemble ensuite." options={choices.volume} value={answers.volume} onChoose={(value) => choose("volume", value)} />}
+              {step === 2 && <Question title="Combien d'outils utilisez-vous ?" subtitle="Par exemple : Gmail, Outlook, Google Sheets, Notion ou un CRM." options={choices.tools} value={answers.tools} onChoose={(value) => choose("tools", value)} />}
+              {step === 3 && <form onSubmit={submit}><h2 className="text-3xl font-bold">Votre estimation</h2><p className="mt-3 text-[#5E6B82]">Pour ce type de projet, comptez généralement :</p><div className="my-7 rounded-2xl bg-[#EEF3F8] p-6 text-center"><p className="text-sm font-semibold text-[#1E4E8C]">ESTIMATION INDICATIVE</p><p className="mt-2 text-3xl font-extrabold">{estimate}</p><p className="mt-3 text-sm text-[#5E6B82]">Le prix final dépendra des outils et de vos besoins précis.</p></div><div className="space-y-4"><Input label="Votre nom" value={answers.name} onChange={(value) => setAnswers({ ...answers, name: value })} required /><Input label="Email professionnel" type="email" value={answers.email} onChange={(value) => setAnswers({ ...answers, email: value })} required /><Input label="Entreprise" value={answers.company} onChange={(value) => setAnswers({ ...answers, company: value })} required /></div><button disabled={isSubmitting} className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white transition hover:bg-[#23589D] disabled:opacity-60">{isSubmitting ? "Envoi en cours…" : "Recevoir mon estimation"}<ArrowRight className="h-5 w-5" /></button>{error && <p className="mt-4 text-center text-sm text-red-600">{error}</p>}<p className="mt-4 text-center text-xs text-[#5E6B82]">Vos informations servent uniquement à répondre à votre demande.</p></form>}
+              {step > 0 && <button type="button" onClick={previous} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#1E4E8C]"><ArrowLeft className="h-4 w-4" /> Revenir à la question précédente</button>}
+            </>
+          )}
         </div>
       </section>
     </div>
   );
+}
+
+function Question({ title, subtitle, options, value, onChoose }: { title: string; subtitle: string; options: string[]; value: string; onChoose: (value: string) => void }) {
+  return <div><h2 className="text-3xl font-bold">{title}</h2><p className="mt-3 text-[#5E6B82]">{subtitle}</p><div className="mt-8 space-y-3">{options.map((option) => <button key={option} type="button" onClick={() => onChoose(option)} className={`w-full rounded-2xl border p-5 text-left font-semibold transition ${value === option ? "border-[#1E4E8C] bg-[#1E4E8C]/5 text-[#1E4E8C]" : "border-[#1E4E8C]/15 hover:border-[#1E4E8C] hover:bg-[#F7F9FC]"}`}>{option}</button>)}</div></div>;
+}
+
+function Input({ label, value, onChange, type = "text", required = false }: { label: string; value: string; onChange: (value: string) => void; type?: string; required?: boolean }) {
+  return <label className="block text-sm font-semibold">{label}<input type={type} value={value} onChange={(event) => onChange(event.target.value)} required={required} className="mt-2 w-full rounded-xl border border-[#1E4E8C]/15 bg-[#F7F9FC] px-4 py-3 font-normal outline-none transition focus:border-[#1E4E8C]" /></label>;
 }
