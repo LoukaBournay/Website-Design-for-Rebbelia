@@ -4,42 +4,38 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 type Answers = {
   need: string;
   volume: string;
-  tools: string;
+  tools: string[];
   name: string;
   email: string;
   company: string;
 };
 
 const choices = {
-  need: ["Répondre aux demandes de devis", "Gérer les emails ou avis Google", "Relancer et suivre mes clients", "Un autre besoin"],
+  need: ["Tri d'emails ou réponse assistée", "Répondre aux demandes de devis", "Gérer les avis, relances ou le CRM", "Un autre besoin"],
   volume: ["Moins de 10 demandes par semaine", "Entre 10 et 50 demandes par semaine", "Plus de 50 demandes par semaine"],
-  tools: ["Un ou deux outils", "Plusieurs outils à connecter", "Je ne sais pas encore"],
+  tools: ["Gmail", "Outlook", "Google Sheets", "Notion", "Google Business Profile", "HubSpot", "Pipedrive", "Slack", "WhatsApp", "Autre outil"],
 };
 
 export function Contact() {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Answers>({ need: "", volume: "", tools: "", name: "", email: "", company: "" });
+  const [answers, setAnswers] = useState<Answers>({ need: "", volume: "", tools: [], name: "", email: "", company: "" });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
   const estimate = useMemo(() => {
-    let score = 0;
-    if (answers.volume.includes("10 et 50")) score += 1;
-    if (answers.volume.includes("Plus de 50")) score += 2;
-    if (answers.tools.includes("Plusieurs")) score += 2;
-    if (answers.need === "Un autre besoin") score += 1;
-    if (score <= 1) return "490 à 990 €";
-    if (score <= 3) return "990 à 1 990 €";
-    return "1 990 à 3 900 €";
+    if (answers.need === "Tri d'emails ou réponse assistée" && answers.tools.length <= 2) return { name: "Automatisation Essentielle", setup: "500 €", monthly: "49 €/mois" };
+    if (answers.need !== "Un autre besoin" && answers.tools.length <= 3) return { name: "Automatisation Métier", setup: "900 à 1 500 €", monthly: "99 €/mois" };
+    return { name: "Automatisation Sur mesure", setup: "À partir de 2 000 €", monthly: "149 à 249 €/mois" };
   }, [answers]);
 
   const next = () => setStep((current) => current + 1);
   const previous = () => setStep((current) => Math.max(0, current - 1));
-  const choose = (field: "need" | "volume" | "tools", value: string) => {
+  const choose = (field: "need" | "volume", value: string) => {
     setAnswers((current) => ({ ...current, [field]: value }));
     window.setTimeout(next, 180);
   };
+  const toggleTool = (tool: string) => setAnswers((current) => ({ ...current, tools: current.tools.includes(tool) ? current.tools.filter((item) => item !== tool) : [...current.tools, tool] }));
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -55,8 +51,10 @@ export function Contact() {
           entreprise: answers.company,
           besoin: answers.need,
           volume: answers.volume,
-          outils: answers.tools,
-          estimation_indicative: estimate,
+          outils: answers.tools.join(", "),
+          offre_estimee: estimate.name,
+          installation_estimee: estimate.setup,
+          suivi_mensuel: estimate.monthly,
         }),
       });
       if (!response.ok) throw new Error("Envoi impossible");
@@ -68,7 +66,7 @@ export function Contact() {
     }
   };
 
-  const progress = Math.round(((step + 1) / 4) * 100);
+  const progress = Math.round(((step + 1) / 5) * 100);
 
   return (
     <div className="min-h-screen bg-[#F7F9FC] text-[#172033]">
@@ -89,8 +87,9 @@ export function Contact() {
               <div className="mb-10"><div className="mb-3 flex justify-between text-sm font-medium text-[#5E6B82]"><span>Question {step + 1} sur 4</span><span>{progress}%</span></div><div className="h-2 overflow-hidden rounded-full bg-[#EEF3F8]"><div className="h-full rounded-full bg-[#1E4E8C] transition-all duration-300" style={{ width: `${progress}%` }} /></div></div>
               {step === 0 && <Question title="Que souhaitez-vous automatiser ?" subtitle="Choisissez le besoin le plus proche de votre situation." options={choices.need} value={answers.need} onChoose={(value) => choose("need", value)} />}
               {step === 1 && <Question title="Quel est le volume à traiter ?" subtitle="Une estimation suffit : nous affinerons ensemble ensuite." options={choices.volume} value={answers.volume} onChoose={(value) => choose("volume", value)} />}
-              {step === 2 && <Question title="Combien d'outils utilisez-vous ?" subtitle="Par exemple : Gmail, Outlook, Google Sheets, Notion ou un CRM." options={choices.tools} value={answers.tools} onChoose={(value) => choose("tools", value)} />}
-              {step === 3 && <form onSubmit={submit}><h2 className="text-3xl font-bold">Votre estimation</h2><p className="mt-3 text-[#5E6B82]">Pour ce type de projet, comptez généralement :</p><div className="my-7 rounded-2xl bg-[#EEF3F8] p-6 text-center"><p className="text-sm font-semibold text-[#1E4E8C]">ESTIMATION INDICATIVE</p><p className="mt-2 text-3xl font-extrabold">{estimate}</p><p className="mt-3 text-sm text-[#5E6B82]">Le prix final dépendra des outils et de vos besoins précis.</p></div><div className="space-y-4"><Input label="Votre nom" value={answers.name} onChange={(value) => setAnswers({ ...answers, name: value })} required /><Input label="Email professionnel" type="email" value={answers.email} onChange={(value) => setAnswers({ ...answers, email: value })} required /><Input label="Entreprise" value={answers.company} onChange={(value) => setAnswers({ ...answers, company: value })} required /></div><button disabled={isSubmitting} className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white transition hover:bg-[#23589D] disabled:opacity-60">{isSubmitting ? "Envoi en cours…" : "Recevoir mon estimation"}<ArrowRight className="h-5 w-5" /></button>{error && <p className="mt-4 text-center text-sm text-red-600">{error}</p>}<p className="mt-4 text-center text-xs text-[#5E6B82]">Vos informations servent uniquement à répondre à votre demande.</p></form>}
+              {step === 2 && <div><h2 className="text-3xl font-bold">Quels outils utilisez-vous ?</h2><p className="mt-3 text-[#5E6B82]">Sélectionnez tous les outils concernés. Vous pourrez en ajouter lors de l'échange.</p><div className="mt-8 grid gap-3 sm:grid-cols-2">{choices.tools.map((tool) => <button key={tool} type="button" onClick={() => toggleTool(tool)} className={`rounded-2xl border p-4 text-left font-semibold transition ${answers.tools.includes(tool) ? "border-[#1E4E8C] bg-[#1E4E8C]/5 text-[#1E4E8C]" : "border-[#1E4E8C]/15 hover:border-[#1E4E8C]"}`}>{answers.tools.includes(tool) ? "✓ " : ""}{tool}</button>)}</div><button type="button" disabled={!answers.tools.length} onClick={next} className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white disabled:opacity-50">Continuer <ArrowRight className="h-5 w-5" /></button></div>}
+              {step === 3 && <div><h2 className="text-3xl font-bold">Vos coordonnées</h2><p className="mt-3 text-[#5E6B82]">Nous vous enverrons votre estimation et pourrons affiner le besoin avec vous.</p><div className="mt-8 space-y-4"><Input label="Votre nom" value={answers.name} onChange={(value) => setAnswers({ ...answers, name: value })} required /><Input label="Email professionnel" type="email" value={answers.email} onChange={(value) => setAnswers({ ...answers, email: value })} required /><Input label="Entreprise" value={answers.company} onChange={(value) => setAnswers({ ...answers, company: value })} required /></div><button type="button" disabled={!answers.name || !answers.email || !answers.company} onClick={next} className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white disabled:opacity-50">Voir mon estimation <ArrowRight className="h-5 w-5" /></button></div>}
+              {step === 4 && <form onSubmit={submit}><h2 className="text-3xl font-bold">Votre estimation</h2><p className="mt-3 text-[#5E6B82]">L'offre la plus proche de votre besoin est :</p><div className="my-7 rounded-2xl bg-[#EEF3F8] p-6 text-center"><p className="text-xl font-extrabold">{estimate.name}</p><p className="mt-4 text-sm font-semibold text-[#1E4E8C]">INSTALLATION</p><p className="text-3xl font-extrabold">{estimate.setup}</p><p className="mt-4 text-sm font-semibold text-[#1E4E8C]">SUIVI MENSUEL</p><p className="text-xl font-bold">{estimate.monthly}</p><p className="mt-4 text-sm text-[#5E6B82]">Prix fixe confirmé avant toute mise en place.</p></div>{estimate.name === "Automatisation Essentielle" && <p className="mb-5 rounded-xl border border-[#D4A64A]/30 bg-[#D4A64A]/10 p-4 text-sm text-[#5E6B82]">L'offre Essentielle comprend une automatisation pour une tâche précise, jusqu'à deux outils connectés et une phase de correction. Les besoins plus complexes font l'objet d'un devis personnalisé.</p>}<button disabled={isSubmitting} className="flex w-full items-center justify-center gap-2 rounded-full bg-[#1E4E8C] px-7 py-4 font-semibold text-white transition hover:bg-[#23589D] disabled:opacity-60">{isSubmitting ? "Envoi en cours…" : "Envoyer ma demande"}<ArrowRight className="h-5 w-5" /></button>{error && <p className="mt-4 text-center text-sm text-red-600">{error}</p>}<p className="mt-4 text-center text-xs text-[#5E6B82]">Vos informations servent uniquement à répondre à votre demande.</p></form>}
               {step > 0 && <button type="button" onClick={previous} className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#1E4E8C]"><ArrowLeft className="h-4 w-4" /> Revenir à la question précédente</button>}
             </>
           )}
